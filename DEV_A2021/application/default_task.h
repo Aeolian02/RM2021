@@ -3,6 +3,6 @@
 #include "struct_typedef.h"
 
 
-
+void jansson_pack_test(void);
 
 #endif

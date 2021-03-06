@@ -26,6 +26,9 @@
 #define CHASSIS_CAN hcan1
 #define GIMBAL_CAN hcan2
 
+
+void test(void);
+
 /* CAN send and receive ID */
 typedef enum
 {
@@ -38,7 +41,7 @@ typedef enum
     CAN_YAW_MOTOR_ID = 0x205,
     CAN_PIT_MOTOR_ID = 0x206,
     CAN_TRIGGER_MOTOR_ID = 0x207,
-    CAN_GIMBAL_ALL_ID = 0x1FF,
+    CAN_GIMBAL_ALL_ID = 0x2FF,
 
 } can_msg_id_e;
 

@@ -25,7 +25,7 @@
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
@@ -103,7 +103,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of TestTask */
-  osThreadDef(TestTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadDef(TestTask, StartDefaultTask, osPriorityNormal, 0, 256);
   TestTaskHandle = osThreadCreate(osThread(TestTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

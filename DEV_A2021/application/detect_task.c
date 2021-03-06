@@ -304,3 +304,10 @@ static void detect_init(uint32_t time)
 //    error_list[DBUSTOE].solveDataErrorFun = slove_data_error;
 
 }
+
+//own add
+void OLED_com_reset(void)
+{
+
+	
+}
