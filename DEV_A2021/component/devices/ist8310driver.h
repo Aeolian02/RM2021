@@ -21,6 +21,7 @@
 #ifndef IST8310DRIVER_H
 #define IST8310DRIVER_H
 #include "main.h"
+#include "struct_typedef.h"
 
 #define IST8310_DATA_READY_BIT 2
 

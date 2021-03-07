@@ -21,14 +21,21 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "can.h"
+#include "dma.h"
+#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+
 #include <stdio.h>
+#include <stdarg.h>
+#include "string.h"
 #include "bsp_can.h"
+#include "remote_control.h"
+#include "bsp_usart.h"
 
 /* USER CODE END Includes */
 
@@ -104,13 +111,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   MX_CAN2_Init();
+  MX_USART1_UART_Init();
+  MX_SPI5_Init();
   /* USER CODE BEGIN 2 */
 
 
-can_filter_init();
+    can_filter_init();
+    remote_control_init();
+    usart2_tx_dma_init();
+    //local_rc_ctrl = get_remote_control_point();
 
   /* USER CODE END 2 */
 
@@ -167,7 +180,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {

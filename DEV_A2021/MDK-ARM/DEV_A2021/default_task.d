@@ -31,6 +31,7 @@ dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flas
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 dev_a2021\default_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
@@ -54,3 +55,5 @@ dev_a2021\default_task.o: ..\application\CAN_receive.h
 dev_a2021\default_task.o: D:\mdk 5\ARM\ARMCC\Bin\..\include\stdlib.h
 dev_a2021\default_task.o: D:\mdk 5\ARM\ARMCC\Bin\..\include\string.h
 dev_a2021\default_task.o: ..\bsp\boards\cJSON.h
+dev_a2021\default_task.o: ..\bsp\boards\bsp_usart.h
+dev_a2021\default_task.o: ..\component\devices\mpu6500driver.h

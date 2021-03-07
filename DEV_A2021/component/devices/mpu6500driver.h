@@ -2,6 +2,7 @@
 #define MPU6500DRIVER_H
 
 #include "main.h"
+#include "struct_typedef.h"
 
 #define MPU6500
 

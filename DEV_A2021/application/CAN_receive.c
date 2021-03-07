@@ -46,8 +46,30 @@ extern CAN_HandleTypeDef hcan2;
 /*
 motor data,  0:chassis motor1 3508;1:chassis motor3 3508;2:chassis motor3 3508;3:chassis motor4 3508;
 4:yaw gimbal motor 6020;5:pitch gimbal motor 6020;6:trigger motor 2006;
-电机数据, 0:底盘电机1 3508电机,  1:底盘电机2 3508电机,2:底盘电机3 3508电机,3:底盘电机4 3508电机;
-4:yaw云台电机 6020电机; 5:pitch云台电机 6020电机; 6:拨弹电机 2006电机*/
+
+		电机数据, 
+		0:底盘电机1 3508电机,  
+		1:底盘电机2 3508电机,
+		2:底盘电机3 3508电机,
+		3:底盘电机4 3508电机;
+    4:yaw云台电机 6020电机; 
+		5:pitch云台电机 6020电机; 
+		6:拨弹电机 2006电机*/
+		
+/*
+		motor ID
+		CAN_CHASSIS_ALL_ID = 0x1FF,
+    CAN_3508_M1_ID = 0x201,
+    CAN_3508_M2_ID = 0x202,
+    CAN_3508_M3_ID = 0x203,
+    CAN_3508_M4_ID = 0x204,
+
+    CAN_YAW_MOTOR_ID = 0x205,
+    CAN_PIT_MOTOR_ID = 0x206,
+    CAN_TRIGGER_MOTOR_ID = 0x207,
+    CAN_GIMBAL_ALL_ID = 0x2FF,
+*/
+		
 static motor_measure_t motor_chassis[7];
 
 static CAN_TxHeaderTypeDef  gimbal_tx_message;
@@ -70,8 +92,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     CAN_RxHeaderTypeDef rx_header;
     uint8_t rx_data[8];
 
-	
-	  printf("IQ");
+	  //NVIC test
+	  //printf("IQ");
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
 
     switch (rx_header.StdId)
@@ -90,9 +112,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
             get_motor_measure(&motor_chassis[i], rx_data);
             //detect_hook(CHASSIS_MOTOR1_TOE + i);
 					
-					//test
-					//printf{"rec\n");
-					printf("rec");
+					
+					
             break;
         }
 
@@ -137,7 +158,7 @@ void CAN_cmd_gimbal(int16_t yaw, int16_t pitch, int16_t shoot, int16_t rev)
     gimbal_can_send_data[5] = shoot;
     gimbal_can_send_data[6] = (rev >> 8);
     gimbal_can_send_data[7] = rev;
-    HAL_CAN_AddTxMessage(&CHASSIS_CAN, &gimbal_tx_message, gimbal_can_send_data, &send_mail_box);
+    HAL_CAN_AddTxMessage(&GIMBAL_CAN, &gimbal_tx_message, gimbal_can_send_data, &send_mail_box);
 }
 
 /**
@@ -207,8 +228,6 @@ void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t mot
     chassis_can_send_data[7] = motor4;
 	
 	
-printf("1 is %c\n",chassis_can_send_data[0]);
-printf("2 is %c\n",chassis_can_send_data[1]);	
 	
     HAL_CAN_AddTxMessage(&CHASSIS_CAN, &chassis_tx_message, chassis_can_send_data, &send_mail_box);
 }
@@ -275,17 +294,5 @@ const motor_measure_t *get_chassis_motor_measure_point(uint8_t i)
     return &motor_chassis[(i & 0x03)];
 }
 
-void test(void)
-{
-	CAN_RxHeaderTypeDef rx_header;
-    uint8_t rx_data[8];
 
-	
-	  printf("IQ\n");
-    HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &rx_header, rx_data);
-	
-	printf("r1 is %c\n",rx_data[0]);
-printf("r2 is %c\n",rx_data[1]);	
-	printf("%d\n",(uint16_t)((rx_data)[0] << 8 | (rx_data)[1]));
-}
 

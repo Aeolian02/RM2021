@@ -2,6 +2,7 @@
 #define MPU6500DRIVERMIDDLEWARE_H
 
 #include "main.h"
+#include "struct_typedef.h"
 
 #define MPU6500_USE_SPI
 //to do list …–Œ¥  ≈‰IICÕ®–≈

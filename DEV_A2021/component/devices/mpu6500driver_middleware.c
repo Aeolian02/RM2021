@@ -2,11 +2,13 @@
   ****************************(C) COPYRIGHT 2016 DJI****************************
   * @file       mpu6500middleware.c/h
   * @brief      mpu6500磁力计中间层，完成mpu6500的通信函数,延时函数。
-  *             
+  *                   
   * @note       IST8310只支持IIC读取
+  *             适配A板&HAL库
   * @history
   *  Version    Date            Author          Modification
   *  V1.0.0     Dec-26-2018     RM              1. 完成
+  *  V2.0.0     March-6-2021    Aweolian        1. finish
   *
   @verbatim
   ==============================================================================
@@ -18,7 +20,7 @@
 
 #include "mpu6500driver_middleware.h"
 #include "stm32f4xx.h"
-#include "delay.h"
+#include "bsp_delay.h"
 
 #if defined(MPU6500_USE_SPI)
 
@@ -30,7 +32,7 @@
 
 void mpu6500_GPIO_init(void)
 {
-
+    /*
 #if defined(MPU6500_USE_SPI)
 
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -48,11 +50,12 @@ void mpu6500_GPIO_init(void)
 #elif defined(MPU6500_USE_IIC)
 
 #endif
+*/
 }
 
 void mpu6500_com_init(void)
 {
-
+ /*
 #if defined(MPU6500_USE_SPI)
     SPI5Init();
 
@@ -63,6 +66,7 @@ void mpu6500_com_init(void)
 #error "Please select the communication of MPU6500"
 
 #endif
+*/
 }
 
 void mpu6500_middleware_delay_ms(uint16_t ms)
@@ -78,15 +82,15 @@ void mpu6500_middleware_delay_us(uint32_t us)
 
 void mpu6500_SPI_NS_H(void)
 {
-    GPIO_SetBits(GPIOF, GPIO_Pin_6);
+   HAL_GPIO_WritePin(GPIOH, GPIO_PIN_5, GPIO_PIN_SET);
 }
 void mpu6500_SPI_NS_L(void)
 {
-    GPIO_ResetBits(GPIOF, GPIO_Pin_6);
+    HAL_GPIO_WritePin(GPIOH, GPIO_PIN_5, GPIO_PIN_RESET);
 }
 
-static uint8_t mpu6500_SPI_read_write_byte(uint8_t TxData)
-{
+static uint8_t mpu6500_SPI_read_write_byte(uint8_t txdata)
+{/*
     uint8_t retry = 0;
     while (SPI_I2S_GetFlagStatus(SPI5, SPI_I2S_FLAG_TXE) == RESET)
     {
@@ -111,6 +115,10 @@ static uint8_t mpu6500_SPI_read_write_byte(uint8_t TxData)
     }
 
     return SPI_I2S_ReceiveData(SPI5);
+    */
+    uint8_t rx_data;
+    HAL_SPI_TransmitReceive(&hspi5, &txdata, &rx_data, 1, 1000);
+    return rx_data;
 }
 void mpu6500_write_single_reg(uint8_t reg, uint8_t data)
 {
@@ -129,6 +137,7 @@ uint8_t mpu6500_read_single_reg(uint8_t reg)
     mpu6500_SPI_NS_H();
     return res;
 }
+
 
 void mpu6500_write_muli_reg(uint8_t reg, uint8_t *buf, uint8_t len)
 {

@@ -27,6 +27,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "cJSON.h"
+#include "bsp_usart.h"
+
+#include "mpu6500driver.h"
+
+
 /**
   * @brief          test task
   * @param[in]      pvParameters: NULL
@@ -39,6 +44,7 @@
   */
 	
 	//jansson Test
+	//wrongD:\RM B&S 2020??\standard\user\APP\INS_task\INS_task.c
 	
 void jansson_pack_test(void)
 {
@@ -95,27 +101,39 @@ free(out);
 void StartDefaultTask(void const * argument)
 {
 	
+	//int rec=0;
+  //	int16_t data=20000;
+	//fp32 gyro[3], accel[3], temp;
+	uint8_t mpu6500_spi_rxbuf[23];
+	static mpu6500_real_data_t mpu6500_real_data; //????????MPU6500??
 	
-	int16_t data=20000;
+	mpu6500_init();
 	while(1)
 	{
-		//HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_11);
-	// HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_14);
-	  printf("test\n");
-	 //jansson_pack_test();
+		//led blink test
+	  HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_11);
+	  HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_14);
 		
-  	//osDelay(20);
-		//CAN_cmd_gimbal(10,10,10,10);
-		//CAN_cmd_chassis(16333,16333,16333,16333);
-		CAN_cmd_gimbal(data,data,data,data);
+		//usart2 test
+	  printf("test\n");
+		osDelay(200);
+		mpu6500_read_over((mpu6500_spi_rxbuf + 1), &mpu6500_real_data);
+		printf("%f\n",mpu6500_real_data.accel[0]);
+		
+	 //usart_printf("dma test\n");
+		
+		//scanf("%d",&rec);
+		//printf("rec is %d\n",rec);
+  	osDelay(50);
+		
+		//CAN_cmd_chassis(data,data,data,data);
 		//osDelay(50);
 		
 		
 		    
 
     
-		//printf("%c",rx_data[0]);
-		//osDelay(200);
+		
 
 	}
 	

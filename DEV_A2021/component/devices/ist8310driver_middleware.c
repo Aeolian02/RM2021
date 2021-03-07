@@ -4,9 +4,11 @@
   * @brief      IST8310磁力计中间层，完成IST8310的IIC通信,因为设置MPU6500的SPI通信
   *             所以设置的是通过mpu6500的IIC_SLV0完成读取，IIC_SLV4完成写入。
   * @note       IST8310只支持IIC读取
+  *             适配A板&HAL库
   * @history
   *  Version    Date            Author          Modification
   *  V1.0.0     Dec-26-2018     RM              1. 完成
+  *  V2.0.0     March-6-2021    Aweolian        1. finish
   *
   @verbatim
   ==============================================================================
@@ -18,13 +20,14 @@
 
 #include "ist8310driver_middleWare.h"
 #include "stm32f4xx.h"
-#include "delay.h"
+#include "bsp_delay.h"
 
 #include "mpu6500driver_middleWare.h"
 #include "mpu6500reg.h"
 
 void ist8310_GPIO_init(void)
 {
+    /*
     GPIO_InitTypeDef GPIO_InitStructure;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
@@ -43,6 +46,7 @@ void ist8310_GPIO_init(void)
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
     GPIO_Init(GPIOE, &GPIO_InitStructure);
+    */
 }
 
 void ist8310_com_init(void)
@@ -102,9 +106,9 @@ void ist8310_delay_us(uint16_t us)
 
 void ist8310_RST_H(void)
 {
-    GPIO_SetBits(GPIOE, GPIO_Pin_2);
+    HAL_GPIO_WritePin(GPIOH, GPIO_PIN_3, GPIO_PIN_SET);
 }
 extern void ist8310_RST_L(void)
 {
-    GPIO_ResetBits(GPIOE, GPIO_Pin_2);
+    HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_RESET);
 }

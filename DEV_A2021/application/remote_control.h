@@ -7,8 +7,7 @@
   * @note       
   * @history
   *  Version    Date            Author          Modification
-  *  V1.0.0     Dec-26-2018     RM              1. done
-  *  V1.0.0     Nov-11-2019     RM              1. support development board tpye c
+  *  V1.0.0     Dec-26-2018     RM              1. 完成
   *
   @verbatim
   ==============================================================================
@@ -79,10 +78,27 @@ typedef __packed struct
 
 /* ----------------------- Internal Data ----------------------------------- */
 
+/**
+  * @brief          remote control init
+  * @param[in]      none
+  * @retval         none
+  */
+/**
+  * @brief          遥控器初始化
+  * @param[in]      none
+  * @retval         none
+  */
 extern void remote_control_init(void);
+/**
+  * @brief          get remote control data point
+  * @param[in]      none
+  * @retval         remote control data point
+  */
+/**
+  * @brief          获取遥控器数据指针
+  * @param[in]      none
+  * @retval         遥控器数据指针
+  */
 extern const RC_ctrl_t *get_remote_control_point(void);
-extern uint8_t RC_data_is_error(void);
-extern void slove_RC_lost(void);
-extern void slove_data_error(void);
-extern void sbus_to_usart1(uint8_t *sbus);
+
 #endif

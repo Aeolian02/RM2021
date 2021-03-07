@@ -29,6 +29,7 @@ dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 dev_a2021\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
@@ -47,8 +48,15 @@ dev_a2021\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 dev_a2021\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 dev_a2021\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 dev_a2021\main.o: ../Inc/can.h
+dev_a2021\main.o: ../Inc/dma.h
+dev_a2021\main.o: ../Inc/spi.h
 dev_a2021\main.o: ../Inc/usart.h
 dev_a2021\main.o: ../Inc/gpio.h
 dev_a2021\main.o: D:\mdk 5\ARM\ARMCC\Bin\..\include\stdio.h
+dev_a2021\main.o: D:\mdk 5\ARM\ARMCC\Bin\..\include\stdarg.h
+dev_a2021\main.o: D:\mdk 5\ARM\ARMCC\Bin\..\include\string.h
 dev_a2021\main.o: ..\bsp\boards\bsp_can.h
 dev_a2021\main.o: ..\application\struct_typedef.h
+dev_a2021\main.o: ..\application\remote_control.h
+dev_a2021\main.o: ..\bsp\boards\bsp_rc.h
+dev_a2021\main.o: ..\bsp\boards\bsp_usart.h
